@@ -8,7 +8,8 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from "../movieReviews"
+import MovieReviews from "../movieReviews";
+import { Link } from "react-router-dom";
 
 
 const root = {
@@ -62,7 +63,22 @@ const [drawerOpen, setDrawerOpen] = useState(false);
       <Paper component="ul" sx={{ ...root }}>
           <Chip label="Production_countries" sx={{ ...chip }} color="primary" />
         <Chip label={`United States of America`} />
-       </Paper>
+      </Paper>
+      <Paper 
+        component="ul" 
+        sx={{...root}}
+      >
+        <li>
+          <Chip label="production companies" sx={{...chip}} color="primary" />
+        </li>
+        {movie.production_companies.map((pc) => (
+          <li key={pc.name}>
+            <Link to={`/companies/${pc.id}`}>
+              <Chip label={pc.name} sx={{...chip}} />
+            </Link>
+          </li>
+        ))}
+      </Paper>
       <Fab
         color="secondary"
         variant="extended"
