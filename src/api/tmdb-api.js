@@ -89,7 +89,6 @@ export const getUpcomingMovies = async () => {
 };
 
 export const getCompany = (args) => {
-    // console.log(args)
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
