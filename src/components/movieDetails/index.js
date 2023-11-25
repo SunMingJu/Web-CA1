@@ -10,6 +10,9 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 import { Link } from "react-router-dom";
+import MovieList from "../movieList";
+import AddToFavoritesIcon from '../cardIcons/addToFavorites'
+import Grid from "@mui/material/Grid";
 
 
 const root = {
@@ -22,7 +25,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie, credits }) => {  // Don't miss this!
+const MovieDetails = ({ movie, cast, crew, similar  }) => {  // Don't miss this!
 const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -48,6 +51,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           </li>
         ))}
       </Paper>
+      
       <Paper component="ul" sx={{...root}}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
@@ -60,6 +64,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
       <Paper 
         component="ul" 
         sx={{...root}}
@@ -73,6 +78,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           </li>
         ))}
       </Paper>
+
       <Paper 
         component="ul" 
         sx={{...root}}
@@ -95,7 +101,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
         <li>
           <Chip label="Cast" sx={{...chip}} color="primary" />
         </li>
-        {credits.cast.map((c) => (
+        {cast.map((c) => (
           <li key={c.name}>
             <Link to={`/`}>
               <Chip label={c.name} sx={{...chip}} />
@@ -103,6 +109,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           </li>
         ))}
       </Paper>
+
       <Paper 
         component="ul" 
         sx={{...root}}
@@ -110,14 +117,24 @@ const [drawerOpen, setDrawerOpen] = useState(false);
         <li>
           <Chip label="Crew" sx={{...chip}} color="primary" />
         </li>
-        {credits.crew.map((c) => (
-          <li key={c.name}>
+        {crew.map((c) => (
+          <li key={c.name.concat(c.department)}>
             <Link to={`/`}>
               <Chip label={c.name} sx={{...chip}} />
             </Link>
           </li>
         ))}
       </Paper>
+
+      <Paper>
+        <Grid item container spacing={4}>
+          <MovieList movies={similar}       
+            action={(movie) => {
+            return <AddToFavoritesIcon movie={movie} />
+          }}></MovieList>
+        </Grid>
+      </Paper>
+
       <Fab
         color="secondary"
         variant="extended"
