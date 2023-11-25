@@ -30,3 +30,4 @@ const NowPlayingPage = (props) => {
   );
 };
 
+export default NowPlayingPage;
