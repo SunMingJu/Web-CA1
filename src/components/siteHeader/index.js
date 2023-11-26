@@ -24,21 +24,15 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Now Playing", path: "/movies/now_playing" },
-    { label: "Popular", path: "/movies/popular" },
-    { label: "TV", path: "/tv/top_rated" },
+    { label: "Home", path: "/page1" },
+    { label: "Favorites", path: "/movies/favorites/page1" },
+    { label: "Upcoming", path: "/movies/upcoming/page1" },
     { label: "People", path: "/person" },
   ];
 
   const moviesOptions  = [
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Now Playing", path: "/movies/now_playing" },
-    { label: "Popular", path: "/movies/popular" },
-    { label: "TV", path: "/tv/top_rated" },
+    { label: "Favorites", path: "/movies/favorites/page1" },
+    { label: "Upcoming", path: "/movies/upcoming/page1" },
   ];
 
 
