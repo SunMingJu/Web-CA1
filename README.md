@@ -20,7 +20,7 @@ New Page
 + Person Detail
 
 New filtering
-+ User can filter movies by language
++ User can filter movies by languages
 
 Update Movie Details
 + add company
