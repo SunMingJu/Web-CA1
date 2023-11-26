@@ -17,7 +17,10 @@ import NowPlayingPage from "./pages/nowPlayingPage";
 import PopularPage from "./pages/popularPage";
 import TopRatedTVPage from "./pages/topRatedTVPage";
 import PersonPage from './pages/personPage';
-import PersonDetailsPage from './pages/personDetailsPage'
+import PersonDetailsPage from './pages/personDetailsPage';
+import LoginPage from "./pages/loginPage";
+import RegisterPage from "./pages/registerPage";
+import ResetPage from "./pages/resetPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,7 +52,10 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={ <Navigate to="/" /> } />
           <Route path="/person/" element={ <PersonPage/> } />
-          <Route path="/person/:id" element={ <PersonDetailsPage/> } />
+          <Route path="/person/:id" element={<PersonDetailsPage />} />
+          <Route exact path="/register" element={<RegisterPage />} />
+          <Route exact path="/reset" element={<ResetPage />} />
+          <Route path="/login" element={<LoginPage />} />
           </Routes>
           </MoviesContextProvider>
       </BrowserRouter>

@@ -11,12 +11,17 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { logout, auth } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Spinner from "../spinner";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const [user, error, isLoading, isError] = useAuthState(auth);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -31,6 +36,7 @@ const SiteHeader = ({ history }) => {
     { label: "Popular", path: "/movies/popular" },
     { label: "TV", path: "/tv/top_rated" },
     { label: "People", path: "/person" },
+    { label: "Log in", path: "/login" },
   ];
 
   const moviesOptions  = [
@@ -43,12 +49,22 @@ const SiteHeader = ({ history }) => {
 
 
   const handleMenuSelect = (pageURL) => {
+    if (pageURL === "/login"){
+      logout()
+    }
     navigate(pageURL, { replace: true });
   };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
   return (
     <>
@@ -143,6 +159,24 @@ const SiteHeader = ({ history }) => {
                     >
                       People
                   </Button>
+                  { (user)? 
+                      <>
+                        Welcome! {user.email} 
+                        <Button 
+                        key="Log out"
+                        color="inherit" onClick={() => handleMenuSelect("/login")}
+                        >
+                          Log out
+                        </Button>
+                      </>
+                      :
+                      <Button 
+                      key="Log in"
+                      color="inherit" onClick={() => handleMenuSelect("/login")}
+                      >
+                        Log in
+                      </Button>
+                   }
                 </div>
               </>
             )}
