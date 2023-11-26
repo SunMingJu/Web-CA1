@@ -7,11 +7,15 @@ import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
 import SiteHeader from './components/siteHeader';
-import UpcomingMoviesPage from './pages/upComingMoviesPage';
+import UpcomingMoviesPage from './pages/upcomingMoviesPage';
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
+import CompanyPage from "./pages/companyPage";
+import NowPlayingPage from "./pages/nowPlayingPage";
+import PopularPage from "./pages/popularPage";
+import TopRatedTVPage from "./pages/topRatedTVPage";
 import PersonPage from './pages/personPage';
 import PersonDetailsPage from './pages/personDetailsPage'
 
@@ -31,14 +35,19 @@ const App = () => {
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
-          <Routes>
-          <Route path="/reviews/form" element={<AddMovieReviewPage />} />
-          <Route exact path="/movies/favorites/page:pagination" element={<FavoriteMoviesPage />} />
-          <Route exact path="/movies/upcoming/page:pagination" element={<UpcomingMoviesPage />} />
+        <Routes>
+          <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+          {/* <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} /> */}
+          <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
           <Route path="/movies/:id" element={<MoviePage />} />
-          <Route path="/reviews/:id" element={<MovieReviewPage />} />
-          <Route path="/page:pagination" element={<HomePage />} />
-          <Route path="*" element={ <Navigate to="/page1" /> } />
+          <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+          <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+          <Route path="/companies/:id" element={ <CompanyPage /> } />
+          <Route path="/movies/now_playing" element={<NowPlayingPage />} />
+          <Route path="/movies/popular" element={<PopularPage />} />
+          <Route path="/tv/top_rated" element={ <TopRatedTVPage /> } />
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={ <Navigate to="/" /> } />
           <Route path="/person/" element={ <PersonPage/> } />
           <Route path="/person/:id" element={ <PersonDetailsPage/> } />
           </Routes>
