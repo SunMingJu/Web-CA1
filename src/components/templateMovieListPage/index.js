@@ -3,12 +3,24 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
 
-function MovieListPageTemplate({ movies, title, action }) {
+function MovieListPageTemplate({
+  movies,
+  page,
+  totalPage,
+  getPage,
+  title,
+  action,
+}) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [languageFilter, setLanguageFilter] = useState("All");
   const genreId = Number(genreFilter);
+
+  const handlePageChange = (event, value) => {
+    getPage(value);
+  };
 
   const languages = ["All"];
   movies.forEach((l) => {
@@ -53,6 +65,14 @@ function MovieListPageTemplate({ movies, title, action }) {
           />
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>
+      </Grid>
+      <Grid container xs={12} sx={{ margin: "20px", justifyContent: "center" }}>
+        <Pagination
+          color="secondary"
+          count={totalPage}
+          page={page}
+          onChange={handlePageChange}
+        />
       </Grid>
     </Grid>
   );
